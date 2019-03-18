@@ -10,10 +10,24 @@
           crossorigin="anonymous">
     <title>Hello!</title>
     <style>
-        iframe {width: 60%; margin-left:20%; margin-top:5%; height:50%; position: fixed; overflow: hidden}
-    </style>
+        iframe {width: 60%; margin-left:20%; margin-top: 100px; height:500px; overflow: hidden}
+        .form_div {width: 60%; margin-left: 20.7%; padding-top 100px; float:left}
+    </style>=
 </head>
 <body>
-<iframe src="http://localhost:8080/API/chat_content" name="chat_iframe" id="chat_iframe"></iframe>
+    <iframe src="http://localhost:80/API/chat_content" name="chat_iframe" id="chat_iframe"></iframe>
+    <div class="form_div">
+        <form method="post">
+        <div class="form-group">
+            <label for="username">Enter your name: </label>
+            <input type="text" class="form-control" id="username"
+                   placeholder="Enter name" name="username" value="{{username}}">
+            <label for="content">Enter your message: </label>
+            <input type="text" class="form-control" id="content"
+                   placeholder="Enter text" name="content">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
