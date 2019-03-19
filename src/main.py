@@ -13,8 +13,7 @@ messages_model.init_table()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if 'username' not in session:
-        session['username'] = 'Anon'
+    session['username'] = 'Anon'
     if request.method == 'POST':
         session['username'] = request.form.get('username')
         messages_model.insert(user_name=request.form.get('username'), content=request.form.get('content'))
@@ -24,9 +23,7 @@ def index():
 @app.route('/API/chat_content', methods=['GET', 'POST'])
 def content():
     if request.method == 'POST':
-        print(session.new, session)
-        messages_model.insert(user_name=session['username'], content=str(list(request.form)[0]), type='image')
-        print(list(request.form)[0])
+        messages_model.insert(user_name=session['username'] if 'username' in session else 'Anon', content=str(list(request.form)[0]), type='image')
     return render_template('chat_content.html', messages=messages_model.get_all()[-10:])
 
 
