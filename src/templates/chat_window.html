@@ -10,14 +10,17 @@
           crossorigin="anonymous">
     <title>Hello!</title>
     <style>
-        iframe {width: 60%; margin-left:20%; margin-top: 100px; height:500px; overflow: hidden}
-        .form_div {width: 60%; margin-left: 20.7%; padding-top 100px; float:left}
-    </style>=
+        iframe {width: 60%; margin-left:15%; margin-top: 100px; height:500px}
+        .form_div {width: 60%; margin-left: 15.1%; padding-top 100px; float:left}
+        img {height: 70px; width: 70 px}
+        #stickers-block {max-width: 15%; margin-left:80%; margin-top: -505px; position: absolute}
+
+    </style>
 </head>
 <body>
-    <iframe src="http://localhost:80/API/chat_content" name="chat_iframe" id="chat_iframe"></iframe>
-    <div class="form_div">
-        <form method="post">
+<iframe src="http://localhost:80/API/chat_content" name="chat_iframe" id="chat_iframe"></iframe>
+<div class="form_div">
+    <form method="post">
         <div class="form-group">
             <label for="username">Enter your name: </label>
             <input type="text" class="form-control" id="username"
@@ -27,7 +30,24 @@
                    placeholder="Enter text" name="content">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
+    </form>
+</div>
+
+<div id="stickers-block">
+    <form method="post" action="http://localhost:80/API/chat_content" target="chat_iframe">
+        <div class="form-group">
+            <table class="table">
+                <tbody>
+                {% for i in range(1, 11, 2) %}
+                    <tr>
+                        <td><button id="{{i}}" type="submit" class="btn btn-primary" name = '{{i}}'><img src="/static/{{i}}.png"></button></td>
+                        <td><button id="{{i+1}}" type="submit" class="btn btn-primary" name = '{{i+1}}'><img src="/static/{{i+1}}.png"></button></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
 </body>
 </html>

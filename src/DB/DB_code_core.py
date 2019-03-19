@@ -25,18 +25,19 @@ class MessagesModel:
                             (id INTEGER PRIMARY KEY AUTOINCREMENT, 
                              time VARCHAR(20),
                              user_name VARCHAR(100),
+                             type VARCHAR(100),
                              content VARCHAR(1000)
                              )''')
         cursor.close()
         self.connection.commit()
 
-    def insert(self, user_name='Anon', content='I love Mashas.'):
+    def insert(self, user_name='Anon', content='I love Mashas.', type='text'):
         time = str(datetime.datetime.now())
         time = time[:time.find('.')]
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO messages 
-                          (time, user_name, content) 
-                          VALUES (?,?,?)''', (time, user_name, content))
+                          (time, user_name, type, content) 
+                          VALUES (?,?,?,?)''', (time, user_name, type, content))
         cursor.close()
         self.connection.commit()
 
