@@ -13,7 +13,8 @@ messages_model.init_table()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    session['username'] = 'Anon'
+    if 'username' not in session:
+        session['username'] = 'Anon'
     if request.method == 'POST':
         session['username'] = request.form.get('username')
         messages_model.insert(user_name=request.form.get('username'), content=request.form.get('content'))
